@@ -4,11 +4,13 @@ BNAME = philo_bonus
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werorr
+CFLAGS = -Wall -Wextra -Werror
 
 #-------MANDATORY-----------
 
-M_SRCS = main.c	\
+M_SRCS = my_main.c		\
+		 philo.c		\
+		 ft_atoi.c		
 
 M_OBJS = $(M_SRCS:.c=.o)
 
@@ -36,7 +38,7 @@ clean:
 	rm -rf $(M_OBJS)
 	rm -rf $(B_OBJS)
 
-fcelan: clean
+fclean: clean
 	rm -rf $(NAME)
 	rm -rf $(BNAME)
 
