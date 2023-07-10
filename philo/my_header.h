@@ -16,6 +16,7 @@ typedef struct	s_philo
 	int				r_fork;
 	int				eat_count;
 	long long		last_eat;
+	pthread_t	p_thread;
 	struct s_rules		*rules;
 }				t_philo;
 

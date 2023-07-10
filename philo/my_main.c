@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@42Istanbul.com.tr>           +#+  +:+   	+#    */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 18:25:28 by Mkarden           #+#    #+#             */
-/*   Updated: 2023/07/09 21:45:05 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/11 00:27:55 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,15 @@ int	is_av_valid(int ac, char **av)
 
 int	main(int ac, char **av)
 {
+	t_rules	*rules;
+	int		i;
+
 	if (is_av_valid(ac, av))
-		philo(init_rules(ac, av));
+	{
+		rules = init_rules(ac, av);
+		if (!rules)
+			return (write(2, "Error Malloc\n", 13));
+	}
 	else
 		write(2, "Error arguments!\n", 17);
 	return (0);

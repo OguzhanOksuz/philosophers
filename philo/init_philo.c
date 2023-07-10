@@ -18,6 +18,7 @@ int	init_mutex(t_rules *rules)
 		return (0);
 	while (i < rules->p_count)
 		pthread_mutex_init(&rules->forks[i++], NULL);
+	i = 0;
 	return (1);
 }
 
