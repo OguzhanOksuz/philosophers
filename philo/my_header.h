@@ -3,9 +3,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <pthread.h>
 
 int		ft_atio(char *str);
-void	philo(int ac, char **av);
+t_rules	*init_rules(int ac, char **av);
+void	philo(t_rules *rules);
 
 typedef struct	s_philo
 {
@@ -26,9 +28,9 @@ typedef struct s_rules
 	int			max_eat;
 	int			is_dead;
 	int			eaten;
-	int			mutux
+	int			mutex;
 	long long	start;
-	t_phlo		**philos;
+	t_philo		**philos;
 	pthread_mutex_t	*forks;
 }			t_rules;
 
