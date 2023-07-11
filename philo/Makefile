@@ -4,11 +4,12 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = my_main.c		\
-		 philo.c		\
-		 ft_atoi.c		
+SRCS =	my_main.c		\
+		init_philo.c	\
+		utils.c			\
+		threads.c
 
-OBJS = $(M_SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 

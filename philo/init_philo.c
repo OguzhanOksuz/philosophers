@@ -1,13 +1,5 @@
 #include "my_header.h"
 
-t_philo **philos_error_free(t_philo **philos, int i)
-{
-	while (i >= 0)
-		free(philos[i--]);
-	free(philos);
-	return (NULL);
-}
-
 int	init_mutex(t_rules *rules)
 {
 	int	i;
@@ -38,12 +30,12 @@ t_philo	**init_philos(t_rules *rules)
 		philos[i]->id = i;
 		philos[i]->l_fork = i;
 		philos[i]->r_fork = (i + 1) % (rules->p_count);
-		philos[i]->eat_count= 0;
+		philos[i]->eat_count = 0;
 		philos[i]->last_eat = rules->start;
-		philos[i]->rules= rules;
-
+		philos[i]->rules = rules;
 	}
 	rules->philos = philos;
+	return (philos);
 }
 
 t_rules	*init_rules(int ac, char **av)
@@ -66,9 +58,9 @@ t_rules	*init_rules(int ac, char **av)
 	rules->start = get_time();
 	init_philos(rules);
 	if (!rules->philos)
-		return (free_rules(rules), NULL);	
+		return (free_rules(rules), NULL);
 	rules->mutex = init_mutex(rules);
 	if (!rules->mutex)
-		return (free_rules(rules), free_philos(rules->philos), NULL);	
+		return (free_rules(rules), free_philos(rules->philos), NULL);
 	return (rules);
 }

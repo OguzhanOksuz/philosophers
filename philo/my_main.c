@@ -3,9 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   my_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooksuz <ooksuz@42Istanbul.com.tr>           +#+  +:+   	+#    */
+/*   By: ooksuz <ooksuz@42Istanbul.com.tr>           +#+  +:+   	+#        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 18:25:28 by Mkarden           #+#    #+#             */
+/*   Created: 2023/07/07 18:25:28 by ooksuz            #+#    #+#             */
 /*   Updated: 2023/07/11 00:27:55 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 		i = 0;
 		while (++i < rules->p_count)
 			pthread_create(&rules->philos[i]->p_thread,
-				NULL, thread, (void *)rules->philo[i]);
+				NULL, thread, (void *)rules->philos[i]);
 	}
 	else
 		write(2, "Error arguments!\n", 17);

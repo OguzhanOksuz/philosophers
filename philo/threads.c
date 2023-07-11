@@ -1,3 +1,26 @@
+int		rw_val(pthread_mutex_t *lock, int *data, int new)
+{
+	int	rt;
+
+	pthread_mutex_lock(lock);
+	if (new)
+		*data = new;
+	rt = *data;
+	pthread_mutex_unlock(lock);
+	return (rt);
+}
+
+void	eat(t_rules *rules, t_philo *philo, int max_eat, int eat_t)
+{
+	ft_print(EAT, philo);
+	philo->eat_count++;
+	if (philo->eat_count == max_eat)
+		rw_val(&rules->read, &rules->eaten,
+			rw_val(&rules->read, &rules->eaten, NULL) + 1);
+	rw_val(&rules->read, &philo->last_eat, get_time());
+	u_sleep(eat_time);
+}
+
 void	*threads(void	*ptr)
 {
 	t_philo	*philo;
@@ -23,15 +46,5 @@ void	*threads(void	*ptr)
 		ft_print(SLEEP, philo);
 		u_sleep(sleep_t);
 	}
-}
-
-void	eat(t_rules *rules, t_philo *philo, int max_eat, int eat_t)
-{
-	ft_print(EAT, philo);
-	philo->eat_count++;
-	if (philo->eat_count == max_eat)
-		rw_val(&rules->read, &rules->eaten,
-			rw_val(&rules->read, &rules->eaten, NULL) + 1);
-	rw_val(&rules->read, &philo->last_eat, get_time());
-	u_sleep(eat_time);
+	return (NULL);
 }

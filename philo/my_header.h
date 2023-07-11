@@ -5,10 +5,6 @@
 # include <stdlib.h>
 # include <pthread.h>
 
-int		ft_atio(char *str);
-t_rules	*init_rules(int ac, char **av);
-void	philo(t_rules *rules);
-
 typedef struct	s_philo
 {
 	int				id;
@@ -34,5 +30,11 @@ typedef struct s_rules
 	t_philo		**philos;
 	pthread_mutex_t	*forks;
 }			t_rules;
+
+int		ft_atoi(char *str);
+t_philo	**philos_error_free(t_philo philo, int i);
+t_rules	*init_rules(int ac, char **av);
+void	*thread(void *ptr);
+long long	get_time();
 
 #endif
