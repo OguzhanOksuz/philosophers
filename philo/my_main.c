@@ -70,6 +70,10 @@ int	main(int ac, char **av)
 		rules = init_rules(ac, av);
 		if (!rules)
 			return (write(2, "Error Malloc\n", 13));
+		i = 0;
+		while (++i < rules->p_count)
+			pthread_create(&rules->philos[i]->p_thread,
+				NULL, thread, (void *)rules->philo[i]);
 	}
 	else
 		write(2, "Error arguments!\n", 17);
