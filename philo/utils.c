@@ -12,7 +12,7 @@ int	ft_atoi(char *str)
 	return (num);
 }
 
-long long	get_time(void)
+int	get_time(void)
 {
 	struct timeval	time;
 

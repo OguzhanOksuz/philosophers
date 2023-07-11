@@ -7,7 +7,8 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS =	my_main.c		\
 		init_philo.c	\
 		utils.c			\
-		threads.c
+		threads.c		\
+		my_free.c
 
 OBJS = $(SRCS:.c=.o)
 

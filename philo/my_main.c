@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 		i = 0;
 		while (++i < rules->p_count)
 			pthread_create(&rules->philos[i]->p_thread,
-				NULL, thread, (void *)rules->philos[i]);
+				NULL, threads, (void *)rules->philos[i]);
 	}
 	else
 		write(2, "Error arguments!\n", 17);
