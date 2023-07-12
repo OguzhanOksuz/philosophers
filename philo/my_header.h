@@ -31,10 +31,10 @@ typedef struct s_rules
 	int				eat_t;
 	int				sleep_t;
 	int				max_eat;
-	int				is_dead;
 	int				eaten;
 	int				mutex;
 	int				start;
+	int				is_dead;
 	t_philo			**philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	read;
@@ -51,5 +51,6 @@ void	free_philos(t_philo **philos);
 void	ft_print(int num, t_philo *philo);
 void	u_sleep(int time);
 void	*threads(void *ptr);
+void	reaper(t_rules *rules);
 
 #endif

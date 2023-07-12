@@ -55,9 +55,9 @@ t_rules	*init_rules(int ac, char **av)
 		rules->max_eat = ft_atoi(av[5]);
 	else
 		rules->max_eat = -1;
-	rules->is_dead = 0;
 	rules->eaten = 0;
 	rules->start = get_time();
+	rules->is_dead = 0;
 	init_philos(rules);
 	if (!rules->philos)
 		return (free_rules(rules), NULL);

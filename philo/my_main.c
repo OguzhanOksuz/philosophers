@@ -83,6 +83,7 @@ int	main(int ac, char **av)
 		while (++i< rules->p_count)
 			pthread_create(&rules->philos[i]->p_thread,
 				NULL, threads, (void *)rules->philos[i]);
+		reaper(rules);
 	}
 	else
 		write(2, "Error arguments!\n", 17);

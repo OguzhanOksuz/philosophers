@@ -50,3 +50,30 @@ void	*threads(void	*ptr)
 	}
 	return (NULL);
 }
+
+void	reaper(t_rules *rules)
+{
+	int	i;
+	int	p_count;
+	int	max_eat;
+	int	death_t;
+
+	p_count = rw_val(&rules->read, &rules->p_count, 0);
+	max_eat = rw_val(&rules->read, &rules->max_eat, 0);
+	death_t = rw_val(&rules->read, &rules->death_t, 0);
+	while (!rw_val(&rules->read, &rules->is_dead, 0))
+	{
+		i = -1;
+		while (++i < p_count)
+		{
+			if (get_time() - rw_val(&rules->read,
+					&rules->philos[i]->last_eat, 0) > death_t)
+			{
+				ft_print(DIE, rules->philos[i]);
+				rw_val(&rules->read, &rules->is_dead, 1);
+			}
+		}
+		if (max_eat == p_count * rw_val(&rules->read, &rules->eaten, 0))
+			rw_val(&rules->read, &rules->is_dead, 1);
+	}
+}
