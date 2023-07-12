@@ -28,7 +28,7 @@ void	u_sleep(int time)
 	while (1)
 	{
 		if (get_time() - i >= time)
-			break;
+			break ;
 		usleep(100);
 	}
 }
@@ -41,7 +41,7 @@ void	ft_print(int code, t_philo *philo)
 	if (!rw_val(&rules->read, &rules->is_dead, 0))
 	{
 		printf("%d ", (get_time() - rw_val(&rules->read, &rules->start, 0)));
-		printf("%d ", rw_val(&rules->read, &philo->id, 0) + 1);
+		printf("%d ", rw_val(&rules->read, &philo->id, 0));
 		if (code == FORK)
 			printf("has taken a fork\n");
 		else if (code == EAT)

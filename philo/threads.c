@@ -1,11 +1,11 @@
 #include "my_header.h"
 
-int		rw_val(pthread_mutex_t *lock, int *data, int new_d)
+int	rw_val(pthread_mutex_t *lock, int *data, int new_d)
 {
 	int	rt;
 
 	pthread_mutex_lock(lock);
-	if (!new_d)
+	if (new_d != 0)
 		*data = new_d;
 	rt = *data;
 	pthread_mutex_unlock(lock);

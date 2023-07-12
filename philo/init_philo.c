@@ -23,12 +23,12 @@ t_philo	**init_philos(t_rules *rules)
 	philos = (t_philo **)malloc(sizeof(t_philo *) * (rules->p_count));
 	if (!philos)
 		return (NULL);
-	while (i <= rules->p_count)
+	while (i < rules->p_count)
 	{
 		philos[i] = (t_philo *)malloc(sizeof(t_philo));
 		if (!philos[i])
 			return (philos_error_free(philos, i));
-		philos[i]->id = i;
+		philos[i]->id = i + 1;
 		philos[i]->l_fork = i;
 		philos[i]->r_fork = (i + 1) % (rules->p_count);
 		philos[i]->eat_count = 0;

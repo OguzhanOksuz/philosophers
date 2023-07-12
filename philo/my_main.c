@@ -70,12 +70,22 @@ int	main(int ac, char **av)
 		rules = init_rules(ac, av);
 		if (!rules)
 			return (write(2, "Error Malloc\n", 13));
-		i = 0;
-		while (++i <= rules->p_count && printf("test \n"))
+		i = -1;
+		/*
+		int	a = 0;
+		while (a < rules->p_count)
+		{
+			printf("a = %d\n", a);
+			printf("id = %d, l_fork = %d, r_fork = %d, eat_count = %d, last_eat = %d\n", rules->philos[a]->id, rules->philos[a]->l_fork, rules->philos[a]->r_fork, rules->philos[a]->eat_count, rules->philos[a]->last_eat);
+			a++;
+		}
+		*/
+		while (++i< rules->p_count)
 			pthread_create(&rules->philos[i]->p_thread,
 				NULL, threads, (void *)rules->philos[i]);
 	}
 	else
 		write(2, "Error arguments!\n", 17);
+	system("leaks philo");
 	return (0);
 }
