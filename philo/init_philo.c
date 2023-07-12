@@ -23,7 +23,7 @@ t_philo	**init_philos(t_rules *rules)
 	philos = (t_philo **)malloc(sizeof(t_philo *) * (rules->p_count));
 	if (!philos)
 		return (NULL);
-	while (i < rules->p_count)
+	while (i <= rules->p_count)
 	{
 		philos[i] = (t_philo *)malloc(sizeof(t_philo));
 		if (!philos[i])
@@ -34,6 +34,7 @@ t_philo	**init_philos(t_rules *rules)
 		philos[i]->eat_count = 0;
 		philos[i]->last_eat = rules->start;
 		philos[i]->rules = rules;
+		i++;
 	}
 	rules->philos = philos;
 	return (philos);

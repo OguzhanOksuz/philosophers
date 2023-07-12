@@ -71,7 +71,7 @@ int	main(int ac, char **av)
 		if (!rules)
 			return (write(2, "Error Malloc\n", 13));
 		i = 0;
-		while (++i < rules->p_count)
+		while (++i <= rules->p_count && printf("test \n"))
 			pthread_create(&rules->philos[i]->p_thread,
 				NULL, threads, (void *)rules->philos[i]);
 	}
