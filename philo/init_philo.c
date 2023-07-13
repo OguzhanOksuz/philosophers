@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_philo.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/11 00:33:06 by ooksuz            #+#    #+#             */
+/*   Updated: 2023/07/11 00:45:39 by ooksuz           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "my_header.h"
 
 int	init_mutex(t_rules *rules)
@@ -11,6 +23,7 @@ int	init_mutex(t_rules *rules)
 	while (i < rules->p_count)
 		pthread_mutex_init(&rules->forks[i++], NULL);
 	pthread_mutex_init(&rules->read, NULL);
+	pthread_mutex_init(&rules->print, NULL);
 	return (1);
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/11 00:34:13 by ooksuz            #+#    #+#             */
+/*   Updated: 2023/07/13 23:34:55 by ooksuz           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "my_header.h"
 
 int	ft_atoi(char *str)
@@ -29,7 +41,7 @@ void	u_sleep(int time)
 	{
 		if (get_time() - i >= time)
 			break ;
-		usleep(100);
+		usleep(10);
 	}
 }
 
@@ -38,6 +50,7 @@ void	ft_print(int code, t_philo *philo)
 	t_rules	*rules;
 
 	rules = philo->rules;
+	pthread_mutex_lock(&philo->rules->print);
 	if (!rw_val(&rules->read, &rules->is_dead, 0))
 	{
 		printf("%d ", (get_time() - rw_val(&rules->read, &rules->start, 0)));
@@ -45,7 +58,7 @@ void	ft_print(int code, t_philo *philo)
 		if (code == FORK)
 			printf("has taken a fork\n");
 		else if (code == EAT)
-			printf("has eating\n");
+			printf("is eating\n");
 		else if (code == SLEEP)
 			printf("is sleeping\n");
 		else if (code == THINK)
@@ -53,4 +66,5 @@ void	ft_print(int code, t_philo *philo)
 		else if (code == DIE)
 			printf("died\n");
 	}
+	pthread_mutex_unlock(&philo->rules->print);
 }

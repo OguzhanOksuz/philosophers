@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooksuz <ooksuz@42Istanbul.com.tr>           +#+  +:+   	+#        */
+/*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 18:25:28 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/11 00:27:55 by ooksuz           ###   ########.fr       */
+/*   Created: 2023/07/11 00:33:38 by ooksuz            #+#    #+#             */
+/*   Updated: 2023/07/13 23:48:14 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,12 @@ int	main(int ac, char **av)
 		if (!rules)
 			return (write(2, "Error Malloc\n", 13));
 		i = -1;
-		/*
-		int	a = 0;
-		while (a < rules->p_count)
-		{
-			printf("a = %d\n", a);
-			printf("id = %d, l_fork = %d, r_fork = %d, eat_count = %d, last_eat = %d\n", rules->philos[a]->id, rules->philos[a]->l_fork, rules->philos[a]->r_fork, rules->philos[a]->eat_count, rules->philos[a]->last_eat);
-			a++;
-		}
-		*/
-		while (++i< rules->p_count)
+		while (++i < rules->p_count)
 			pthread_create(&rules->philos[i]->p_thread,
 				NULL, threads, (void *)rules->philos[i]);
 		reaper(rules);
 	}
 	else
 		write(2, "Error arguments!\n", 17);
-	system("leaks philo");
 	return (0);
 }

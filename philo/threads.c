@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   threads.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/11 00:33:47 by ooksuz            #+#    #+#             */
+/*   Updated: 2023/07/13 23:46:16 by ooksuz           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "my_header.h"
 
 int	rw_val(pthread_mutex_t *lock, int *data, int new_d)
@@ -35,7 +47,7 @@ void	*threads(void	*ptr)
 	eat_t = rw_val(&philo->rules->read, &philo->rules->eat_t, 0);
 	sleep_t = rw_val(&philo->rules->read, &philo->rules->sleep_t, 0);
 	if (philo->id % 2)
-		u_sleep(50);
+		u_sleep(eat_t);
 	while (!rw_val(&philo->rules->read, &philo->rules->is_dead, 0))
 	{
 		pthread_mutex_lock(&philo->rules->forks[philo->l_fork]);
@@ -47,6 +59,7 @@ void	*threads(void	*ptr)
 		pthread_mutex_unlock(&philo->rules->forks[philo->r_fork]);
 		ft_print(SLEEP, philo);
 		u_sleep(sleep_t);
+		ft_print(THINK, philo);
 	}
 	return (NULL);
 }
@@ -54,17 +67,17 @@ void	*threads(void	*ptr)
 void	reaper(t_rules *rules)
 {
 	int	i;
-	int	p_count;
+	int	p_c;
 	int	max_eat;
 	int	death_t;
 
-	p_count = rw_val(&rules->read, &rules->p_count, 0);
+	p_c = rw_val(&rules->read, &rules->p_count, 0);
 	max_eat = rw_val(&rules->read, &rules->max_eat, 0);
 	death_t = rw_val(&rules->read, &rules->death_t, 0);
 	while (!rw_val(&rules->read, &rules->is_dead, 0))
 	{
 		i = -1;
-		while (++i < p_count)
+		while (++i < p_c)
 		{
 			if (get_time() - rw_val(&rules->read,
 					&rules->philos[i]->last_eat, 0) > death_t)
@@ -73,7 +86,7 @@ void	reaper(t_rules *rules)
 				rw_val(&rules->read, &rules->is_dead, 1);
 			}
 		}
-		if (max_eat == p_count * rw_val(&rules->read, &rules->eaten, 0))
+		if (max_eat == p_c * rw_val(&rules->read, &rules->eaten, 0))
 			rw_val(&rules->read, &rules->is_dead, 1);
 	}
 }

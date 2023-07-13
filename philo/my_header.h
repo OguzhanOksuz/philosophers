@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_header.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/11 00:34:03 by ooksuz            #+#    #+#             */
+/*   Updated: 2023/07/11 00:45:15 by ooksuz           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MY_HEADER_H
 # define MY_HEADER_H
 
@@ -38,6 +50,7 @@ typedef struct s_rules
 	t_philo			**philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	read;
+	pthread_mutex_t	print;
 }					t_rules;
 
 int		ft_atoi(char *str);
