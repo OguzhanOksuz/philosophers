@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:47 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/13 23:46:16 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:15:35 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	reaper(t_rules *rules)
 	p_c = rw_val(&rules->read, &rules->p_count, 0);
 	max_eat = rw_val(&rules->read, &rules->max_eat, 0);
 	death_t = rw_val(&rules->read, &rules->death_t, 0);
-	while (!rw_val(&rules->read, &rules->is_dead, 0))
+	while (!rw_val(&rules->death, &rules->is_dead, 0))
 	{
 		i = -1;
 		while (++i < p_c)
@@ -83,10 +83,11 @@ void	reaper(t_rules *rules)
 					&rules->philos[i]->last_eat, 0) > death_t)
 			{
 				ft_print(DIE, rules->philos[i]);
-				rw_val(&rules->read, &rules->is_dead, 1);
+				rw_val(&rules->death, &rules->is_dead, 1);
 			}
 		}
-		if (max_eat == p_c * rw_val(&rules->read, &rules->eaten, 0))
-			rw_val(&rules->read, &rules->is_dead, 1);
+		if (max_eat * p_c == rw_val(&rules->read, &rules->eaten, 0))
+			rw_val(&rules->death, &rules->is_dead, 1);
+		u_sleep(10);
 	}
 }

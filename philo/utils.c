@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:34:13 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/13 23:34:55 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:03:36 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_print(int code, t_philo *philo)
 
 	rules = philo->rules;
 	pthread_mutex_lock(&philo->rules->print);
-	if (!rw_val(&rules->read, &rules->is_dead, 0))
+	if (!rw_val(&rules->death, &rules->is_dead, 0))
 	{
 		printf("%d ", (get_time() - rw_val(&rules->read, &rules->start, 0)));
 		printf("%d ", rw_val(&rules->read, &philo->id, 0));

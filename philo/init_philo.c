@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:06 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/11 00:45:39 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:05:25 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	init_mutex(t_rules *rules)
 		pthread_mutex_init(&rules->forks[i++], NULL);
 	pthread_mutex_init(&rules->read, NULL);
 	pthread_mutex_init(&rules->print, NULL);
+	pthread_mutex_init(&rules->death, NULL);
 	return (1);
 }
 
@@ -45,7 +46,7 @@ t_philo	**init_philos(t_rules *rules)
 		philos[i]->l_fork = i;
 		philos[i]->r_fork = (i + 1) % (rules->p_count);
 		philos[i]->eat_count = 0;
-		philos[i]->last_eat = rules->start;
+		philos[i]->last_eat = get_time();
 		philos[i]->rules = rules;
 		i++;
 	}
@@ -69,7 +70,6 @@ t_rules	*init_rules(int ac, char **av)
 	else
 		rules->max_eat = -1;
 	rules->eaten = 0;
-	rules->start = get_time();
 	rules->is_dead = 0;
 	init_philos(rules);
 	if (!rules->philos)
@@ -77,5 +77,6 @@ t_rules	*init_rules(int ac, char **av)
 	rules->mutex = init_mutex(rules);
 	if (!rules->mutex)
 		return (free_rules(rules), free_philos(rules->philos), NULL);
+	rules->start = get_time();
 	return (rules);
 }

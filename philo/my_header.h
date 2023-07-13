@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:34:03 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/11 00:45:15 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:03:50 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_rules
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	read;
 	pthread_mutex_t	print;
+	pthread_mutex_t	death;
 }					t_rules;
 
 int		ft_atoi(char *str);
