@@ -9,8 +9,7 @@ CFLAGS_THREAD = -Wall -Wextra -Werror -fsanitize=thread
 SRCS =	my_main.c		\
 		init_philo.c	\
 		utils.c			\
-		threads.c		\
-		my_free.c
+		threads.c		
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:34:03 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/14 00:59:33 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 02:21:33 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_rules
 }					t_rules;
 
 int		ft_atoi(char *str);
-t_philo	**philos_error_free(t_philo **philo, int i);
 t_rules	*init_rules(int ac, char **av);
 int		rw_val(pthread_mutex_t *lock, int *data, int new_d);
 void	*thread(void *ptr);
