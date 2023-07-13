@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:34:03 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/14 00:03:50 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:59:33 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ t_rules	*init_rules(int ac, char **av);
 int		rw_val(pthread_mutex_t *lock, int *data, int new_d);
 void	*thread(void *ptr);
 int		get_time(void);
-void	free_rules(t_rules *rules);
-void	free_philos(t_philo **philos);
+void	my_free(t_rules *rules);
 void	ft_print(int num, t_philo *philo);
 void	u_sleep(int time);
 void	*threads(void *ptr);

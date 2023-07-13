@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:06 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/14 00:05:25 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 00:56:43 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ t_rules	*init_rules(int ac, char **av)
 	rules->is_dead = 0;
 	init_philos(rules);
 	if (!rules->philos)
-		return (free_rules(rules), NULL);
+		return (my_free(rules), NULL);
 	rules->mutex = init_mutex(rules);
 	if (!rules->mutex)
-		return (free_rules(rules), free_philos(rules->philos), NULL);
+		return (my_free(rules), NULL);
 	rules->start = get_time();
 	return (rules);
 }

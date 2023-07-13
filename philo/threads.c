@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:47 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/14 00:27:40 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 01:03:03 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*threads(void	*ptr)
 	sleep_t = rw_val(&philo->rules->read, &philo->rules->sleep_t, 0);
 	if (philo->id % 2)
 		u_sleep(eat_t);
-	while (!rw_val(&philo->rules->read, &philo->rules->is_dead, 0))
+	while (!rw_val(&philo->rules->death, &philo->rules->is_dead, 0))
 	{
 		pthread_mutex_lock(&philo->rules->forks[philo->l_fork]);
 		ft_print(FORK, philo);
@@ -90,4 +90,5 @@ void	reaper(t_rules *rules)
 			rw_val(&rules->death, &rules->is_dead, 1);
 		u_sleep(10);
 	}
+	my_free(rules);
 }
