@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:38 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/14 01:29:00 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/14 02:55:31 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 	{
 		rules = init_rules(ac, av);
 		if (!rules)
-			return (write(2, "Error Malloc\n", 13));
+			return (write(2, "Error Malloc\n", 13) - 13);
 		i = -1;
 		while (++i < rules->p_count)
 		{
