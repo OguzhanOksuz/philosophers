@@ -2,7 +2,9 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror
+
+CFLAGS_THREAD = -Wall -Wextra -Werror -fsanitize=thread
 
 SRCS =	my_main.c		\
 		init_philo.c	\
@@ -13,6 +15,9 @@ SRCS =	my_main.c		\
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
+
+data: $(OBJS)
+	$(CC) $(CFLAGS_THREAD) $(OBJS) -o $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
