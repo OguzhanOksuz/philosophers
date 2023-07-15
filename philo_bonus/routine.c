@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:56:00 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/15 17:42:17 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/15 23:58:44 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	routine(t_philo *philo)
 {
-
 	while (!philo->is_dead)
 	{
 		sem_wait(philo->rules->forks);

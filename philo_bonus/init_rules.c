@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:54:03 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/15 17:44:51 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/15 23:59:35 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,11 @@ t_rules	*init_rules(int ac, char **av)
 	init_philos(rules);
 	if (!rules->philos)
 		return (my_free(rules), NULL);
+	sem_unlink("forks");
+	sem_unlink("print");
+	sem_unlink("death");
 	rules->forks = sem_open("forks", O_CREAT, 0666, rules->p_count);
 	rules->print = sem_open("print", O_CREAT, 0666, 1);
-	rules->death = sem_open("death", O_CREAT, 0666, 1);
+	rules->death = sem_open("death", O_CREAT, 0666, 0);
 	return (rules);
 }

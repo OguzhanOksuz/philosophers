@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:11:46 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/15 17:45:52 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/15 23:56:41 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	is_av_valid(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_rules	*rules;
-	pid_t	pid;
 	int		i;
 
 	i = -1;
@@ -71,10 +70,12 @@ int	main(int ac, char **av)
 		rules->start = get_time();
 		while (++i < rules->p_count)
 		{
-			pid = fork();
-			rules->philos[i]->pid = pid;
-			if (pid == 0)
+			rules->philos[i]->pid = fork();
+			if (rules->philos[i]->pid == 0)
+			{
 				routine(rules->philos[i]);
+				exit(0);
+			}
 		}
 		sem_wait(rules->death);
 		end_program(rules);
