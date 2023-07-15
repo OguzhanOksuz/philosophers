@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:54:03 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/15 01:18:53 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/15 17:44:51 by ooksuz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	my_free(t_rules *rules)
 			free(rules->philos[i++]);
 		free(rules->philos);
 	}
+	sem_close(rules->forks);
+	sem_close(rules->print);
+	sem_close(rules->death);
 	free(rules);
 }
 
@@ -33,11 +36,6 @@ t_philo	**philos_error_free(t_philo **philos, int i)
 		free(philos[i--]);
 	free(philos);
 	return (NULL);
-}
-
-int	init_sem(t_rusel *rules)
-{
-
 }
 
 t_philo	**init_philos(t_rules *rules)
@@ -55,6 +53,7 @@ t_philo	**init_philos(t_rules *rules)
 		if (!philos[i])
 			return (philos_error_free(philos, i));
 		philos[i]->id = i + 1;
+		philos[i]->is_dead = 0;
 		philos[i]->eat_count = 0;
 		philos[i]->last_eat = get_time();
 		philos[i]->rules = rules;
@@ -82,6 +81,8 @@ t_rules	*init_rules(int ac, char **av)
 	init_philos(rules);
 	if (!rules->philos)
 		return (my_free(rules), NULL);
-	init_sem(rules);
+	rules->forks = sem_open("forks", O_CREAT, 0666, rules->p_count);
+	rules->print = sem_open("print", O_CREAT, 0666, 1);
+	rules->death = sem_open("death", O_CREAT, 0666, 1);
 	return (rules);
 }
