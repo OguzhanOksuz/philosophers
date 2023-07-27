@@ -57,6 +57,7 @@ t_philo	**init_philos(t_rules *rules)
 		philos[i]->eat_count = 0;
 		philos[i]->last_eat = get_time();
 		philos[i]->rules = rules;
+		pthread_mutex_init(&philos[i]->read, NULL);
 		i++;
 	}
 	rules->philos = philos;

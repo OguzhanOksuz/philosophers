@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 00:38:16 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/15 17:43:19 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/27 15:21:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <semaphore.h>
 # include <signal.h>
+# include <pthread.h>
 
 # define FORK 0
 # define EAT 1
@@ -34,7 +35,9 @@ typedef struct s_philo
 	int				eat_count;
 	int				last_eat;
 	int				is_dead;
+	pthread_t		death;
 	struct s_rules	*rules;
+	pthread_mutex_t	read;
 }					t_philo;
 
 typedef struct s_rules
@@ -59,6 +62,5 @@ void	u_sleep(int time);
 void	ft_print(int code, t_philo *philo);
 void	routine(t_philo *philo);
 void	end_program(t_rules *rules);
-
 
 #endif
