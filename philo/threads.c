@@ -88,7 +88,7 @@ void	reaper(t_rules *rules)
 		}
 		if (p_c == rw_val(&rules->read, &rules->eaten, 0))
 			rw_val(&rules->death, &rules->is_dead, 1);
-		u_sleep(10);
+		u_sleep(100);
 	}
 	my_free(rules);
 }
