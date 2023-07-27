@@ -66,5 +66,6 @@ void	ft_print(int code, t_philo *philo)
 		else if (code == DIE)
 			printf("died\n");
 	}
-	sem_post(rules->print);
+	if (code != DIE)
+		sem_post(rules->print);
 }

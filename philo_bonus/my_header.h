@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 00:38:16 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 15:21:03 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/27 18:24:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_rules
 	t_philo			**philos;
 	sem_t			*forks;
 	sem_t			*print;
+	sem_t			*eating;
+	sem_t			*eaten;
 	sem_t			*death;
 }					t_rules;
 
