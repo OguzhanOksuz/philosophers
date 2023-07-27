@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:56:00 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 18:12:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/27 19:40:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ int	rw_val(pthread_mutex_t *lock, int *data, int new_d)
 	rt = *data;
 	pthread_mutex_unlock(lock);
 	return (rt);
+}
+
+void	*eat_checker(void *ptr)
+{
+	t_rules	*rules;
+	int		i;
+
+	i = -1;
+	rules = (t_rules *)ptr;
+	while (++i < rules->p_count)
+		sem_wait(rules->eaten);
+	sem_post(rules->death);
+	return (0);
 }
 
 void	*reaper(void *ptr)
@@ -73,8 +86,8 @@ void	end_program(t_rules *rules)
 {
 	int	i;
 
-	i = 0;
-	while (i < rules->p_count)
-		kill(rules->philos[i++]->pid, SIGKILL);
+	i = -1;
+	while (++i < rules->p_count)
+		kill(rules->philos[i]->pid, SIGKILL);
 	my_free(rules);
 }

@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 22:54:03 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 18:31:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/27 19:48:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,24 @@ void	my_free(t_rules *rules)
 {
 	int	i;
 
-	i = 0;
 	if (rules->philos)
 	{
 		i = 0;
 		while (i < rules->p_count)
+		{
+			sem_post(rules->eaten);
 			free(rules->philos[i++]);
+		}
 		free(rules->philos);
 	}
 	sem_close(rules->forks);
 	sem_close(rules->print);
 	sem_close(rules->eaten);
 	sem_close(rules->death);
+	sem_unlink("forks");
+	sem_unlink("print");
+	sem_unlink("eaten");
+	sem_unlink("death");
 	free(rules);
 }
 
@@ -69,12 +75,10 @@ int	init_sem(t_rules *rules)
 {
 	sem_unlink("forks");
 	sem_unlink("print");
-	sem_unlink("eating");
 	sem_unlink("eaten");
 	sem_unlink("death");
 	rules->forks = sem_open("forks", O_CREAT, 0666, rules->p_count);
 	rules->print = sem_open("print", O_CREAT, 0666, 1);
-	rules->eating = sem_open("eating", O_CREAT, 0666, 1);
 	rules->eaten = sem_open("eaten", O_CREAT, 0666, 0);
 	rules->death = sem_open("death", O_CREAT, 0666, 0);
 	return (0);

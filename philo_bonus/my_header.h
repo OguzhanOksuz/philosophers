@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 00:38:16 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 18:24:10 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/27 19:26:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ typedef struct s_rules
 	t_philo			**philos;
 	sem_t			*forks;
 	sem_t			*print;
-	sem_t			*eating;
 	sem_t			*eaten;
 	sem_t			*death;
+	pthread_t		eat_check;
 }					t_rules;
 
 int		ft_atoi(char *str);
@@ -63,6 +63,7 @@ t_rules	*init_rules(int ac, char **av);
 void	u_sleep(int time);
 void	ft_print(int code, t_philo *philo);
 void	routine(t_philo *philo);
+void	*eat_checker(void *ptr);
 void	end_program(t_rules *rules);
 
 #endif

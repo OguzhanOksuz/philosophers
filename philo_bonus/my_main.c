@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 02:11:46 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 17:25:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/27 19:39:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,37 @@ int	is_av_valid(int ac, char **av)
 	return (1);
 }
 
-int	main(int ac, char **av)
+void	forker(t_rules *rules)
 {
-	t_rules	*rules;
 	int		i;
 
 	i = -1;
+	while (++i < rules->p_count)
+	{
+		rules->philos[i]->pid = fork();
+		if (rules->philos[i]->pid == 0)
+		{
+			routine(rules->philos[i]);
+			exit(0);
+		}
+	}
+	pthread_create(&rules->eat_check, NULL, eat_checker, rules);
+	pthread_detach(rules->eat_check);
+	sem_wait(rules->death);
+	end_program(rules);
+}
+
+int	main(int ac, char **av)
+{
+	t_rules	*rules;
+
 	if (is_av_valid(ac, av))
 	{
 		rules = init_rules(ac, av);
 		if (!rules)
 			return (write(2, "Error Malloc\n", 13) - 13);
 		rules->start = get_time();
-		while (++i < rules->p_count)
-		{
-			rules->philos[i]->pid = fork();
-			if (rules->philos[i]->pid == 0)
-			{
-				routine(rules->philos[i]);
-				exit(0);
-			}
-		}
-		sem_wait(rules->death);
-		end_program(rules);
+		forker(rules);
 	}
 	else
 		write(2, "Error arguments!\n", 17);
