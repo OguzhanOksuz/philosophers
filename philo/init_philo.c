@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:06 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/14 02:20:53 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:43:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,20 @@ void	my_free(t_rules *rules)
 {
 	int	i;
 
-	i = 0;
-	while (i < rules->p_count)
-		pthread_mutex_destroy(&rules->forks[i++]);
-	pthread_mutex_destroy(&rules->read);
-	pthread_mutex_destroy(&rules->print);
-	pthread_mutex_destroy(&rules->death);
+	i = -1;
+	while (++i < rules->p_count)
+	{
+		pthread_mutex_destroy(&rules->forks[i]);
+		pthread_mutex_destroy(&rules->last_eat_m[i]);
+	}
+	pthread_mutex_destroy(&rules->eat_t_m);
+	pthread_mutex_destroy(&rules->sleep_t_m);
+	pthread_mutex_destroy(&rules->max_eat_m);
+	pthread_mutex_destroy(&rules->eaten_m);
+	pthread_mutex_destroy(&rules->is_death_m);
+	pthread_mutex_destroy(&rules->print_m);
 	free(rules->forks);
+	free(rules->last_eat_m);
 	if (rules->philos)
 	{
 		i = 0;
@@ -45,15 +52,24 @@ int	init_mutex(t_rules *rules)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	rules->forks = malloc(sizeof(pthread_mutex_t) * (rules->p_count));
 	if (!rules->forks)
 		return (0);
-	while (i < rules->p_count)
-		pthread_mutex_init(&rules->forks[i++], NULL);
-	pthread_mutex_init(&rules->read, NULL);
-	pthread_mutex_init(&rules->print, NULL);
-	pthread_mutex_init(&rules->death, NULL);
+	rules->last_eat_m = malloc(sizeof(pthread_mutex_t) * (rules->p_count));
+	if (!rules->last_eat_m)
+		return (free(rules->last_eat_m), 0);
+	while (++i < rules->p_count)
+	{
+		pthread_mutex_init(&rules->forks[i], NULL);
+		pthread_mutex_init(&rules->last_eat_m[i], NULL);
+	}
+	pthread_mutex_init(&rules->eat_t_m, NULL);
+	pthread_mutex_init(&rules->sleep_t_m, NULL);
+	pthread_mutex_init(&rules->max_eat_m, NULL);
+	pthread_mutex_init(&rules->eaten_m, NULL);
+	pthread_mutex_init(&rules->is_death_m, NULL);
+	pthread_mutex_init(&rules->print_m, NULL);
 	return (1);
 }
 
@@ -72,6 +88,7 @@ t_philo	**init_philos(t_rules *rules)
 		if (!philos[i])
 			return (philos_error_free(philos, i));
 		philos[i]->id = i + 1;
+		philos[i]->num = i;
 		philos[i]->l_fork = i;
 		philos[i]->r_fork = (i + 1) % (rules->p_count);
 		philos[i]->eat_count = 0;

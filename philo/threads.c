@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:47 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 18:47:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:41:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	eat(t_rules *rules, t_philo *philo, int max_eat, int eat_t)
 	ft_print(EAT, philo);
 	philo->eat_count++;
 	if (philo->eat_count == max_eat)
-		rw_val(&rules->read, &rules->eaten,
-			rw_val(&rules->read, &rules->eaten, 0) + 1);
-	rw_val(&rules->read, &philo->last_eat, get_time());
+		rw_val(&rules->eaten_m, &rules->eaten,
+			rw_val(&rules->eaten_m, &rules->eaten, 0) + 1);
+	rw_val(&rules->last_eat_m[philo->num], &philo->last_eat, get_time());
 	u_sleep(eat_t);
 }
 
@@ -43,12 +43,12 @@ void	*threads(void	*ptr)
 	int		sleep_t;
 
 	philo = (t_philo *)ptr;
-	max_eat = rw_val(&philo->rules->read, &philo->rules->max_eat, 0);
-	eat_t = rw_val(&philo->rules->read, &philo->rules->eat_t, 0);
-	sleep_t = rw_val(&philo->rules->read, &philo->rules->sleep_t, 0);
+	max_eat = rw_val(&philo->rules->max_eat_m, &philo->rules->max_eat, 0);
+	eat_t = rw_val(&philo->rules->eat_t_m, &philo->rules->eat_t, 0);
+	sleep_t = rw_val(&philo->rules->sleep_t_m, &philo->rules->sleep_t, 0);
 	if (philo->id % 2)
 		u_sleep(eat_t);
-	while (!rw_val(&philo->rules->death, &philo->rules->is_dead, 0))
+	while (!rw_val(&philo->rules->is_death_m, &philo->rules->is_dead, 0))
 	{
 		pthread_mutex_lock(&philo->rules->forks[philo->l_fork]);
 		ft_print(FORK, philo);
@@ -71,23 +71,23 @@ void	reaper(t_rules *rules)
 	int	max_eat;
 	int	death_t;
 
-	p_c = rw_val(&rules->read, &rules->p_count, 0);
-	max_eat = rw_val(&rules->read, &rules->max_eat, 0);
-	death_t = rw_val(&rules->read, &rules->death_t, 0);
-	while (!rw_val(&rules->death, &rules->is_dead, 0))
+	p_c = rules->p_count;
+	max_eat = rw_val(&rules->max_eat_m, &rules->max_eat, 0);
+	death_t = rules->death_t;
+	while (!rw_val(&rules->is_death_m, &rules->is_dead, 0))
 	{
 		i = -1;
 		while (++i < p_c)
 		{
-			if (get_time() - rw_val(&rules->read,
+			if (get_time() - rw_val(&rules->last_eat_m[i],
 					&rules->philos[i]->last_eat, 0) > death_t)
 			{
 				ft_print(DIE, rules->philos[i]);
-				rw_val(&rules->death, &rules->is_dead, 1);
+				rw_val(&rules->is_death_m, &rules->is_dead, 1);
 			}
 		}
-		if (p_c == rw_val(&rules->read, &rules->eaten, 0))
-			rw_val(&rules->death, &rules->is_dead, 1);
+		if (p_c == rw_val(&rules->eaten_m, &rules->eaten, 0))
+			rw_val(&rules->is_death_m, &rules->is_dead, 1);
 		u_sleep(1);
 	}
 	my_free(rules);
