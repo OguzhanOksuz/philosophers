@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:34:13 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/28 13:33:35 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:58:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	u_sleep(int time)
 	{
 		if (get_time() - i >= time)
 			break ;
-		usleep(10);
+		usleep(100);
 	}
 }
 
