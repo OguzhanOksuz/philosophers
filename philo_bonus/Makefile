@@ -6,10 +6,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS_THREAD = -Wall -Wextra -Werror -fsanitize=thread
 
-SRCS =	my_main.c		\
-		init_rules.c	\
-		routine.c	\
-		utils.c
+SRCS =	my_main_bonus.c		\
+		init_rules_bonus.c	\
+		routine_bonus.c		\
+		utils_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

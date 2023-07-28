@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   routine_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:56:00 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 19:40:34 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:33:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "my_header.h"
+#include "my_header_bonus.h"
 
 int	rw_val(pthread_mutex_t *lock, int *data, int new_d)
 {

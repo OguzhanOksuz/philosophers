@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_header.h                                        :+:      :+:    :+:   */
+/*   my_header_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 00:38:16 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/27 19:26:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:32:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_HEADER_H
-# define MY_HEADER_H
+#ifndef MY_HEADER_BONUS_H
+# define MY_HEADER_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
