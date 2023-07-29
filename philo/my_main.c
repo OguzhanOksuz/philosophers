@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:38 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/14 02:55:31 by ooksuz           ###   ########.fr       */
+/*   Updated: 2023/07/29 18:13:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,11 @@ int	main(int ac, char **av)
 			return (write(2, "Error Malloc\n", 13) - 13);
 		i = -1;
 		while (++i < rules->p_count)
-		{
 			pthread_create(&rules->philos[i]->p_thread,
 				NULL, threads, (void *)rules->philos[i]);
-			pthread_detach(rules->philos[i]->p_thread);
-		}
 		reaper(rules);
+		free(rules->philos);
+		free(rules);
 	}
 	else
 		write(2, "Error arguments!\n", 17);

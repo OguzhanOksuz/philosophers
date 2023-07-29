@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:06 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/28 13:43:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/29 18:11:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ void	my_free(t_rules *rules)
 {
 	int	i;
 
+	if (rules->philos)
+	{
+		i = -1;
+		while (++i < rules->p_count)
+		{
+			pthread_join(rules->philos[i]->p_thread, NULL);
+			free(rules->philos[i]);
+		}
+	}
 	i = -1;
 	while (++i < rules->p_count)
 	{
@@ -30,14 +39,6 @@ void	my_free(t_rules *rules)
 	pthread_mutex_destroy(&rules->print_m);
 	free(rules->forks);
 	free(rules->last_eat_m);
-	if (rules->philos)
-	{
-		i = 0;
-		while (i < rules->p_count)
-			free(rules->philos[i++]);
-		free(rules->philos);
-	}
-	free(rules);
 }
 
 t_philo	**philos_error_free(t_philo **philos, int i)

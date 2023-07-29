@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:47 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/28 13:41:16 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/29 18:04:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	reaper(t_rules *rules)
 		}
 		if (p_c == rw_val(&rules->eaten_m, &rules->eaten, 0))
 			rw_val(&rules->is_death_m, &rules->is_dead, 1);
-		u_sleep(1);
+		u_sleep(100);
 	}
 	my_free(rules);
 }
