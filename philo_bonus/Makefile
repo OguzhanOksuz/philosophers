@@ -6,6 +6,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 CFLAGS_THREAD = -Wall -Wextra -Werror -fsanitize=thread
 
+CFLAGS_ADDRESS = -Wall -Wextra -Werror -fsanitize=address
+
 SRCS =	my_main_bonus.c		\
 		init_rules_bonus.c	\
 		routine_bonus.c		\
@@ -15,8 +17,11 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-data: $(OBJS)
+data: fclean $(OBJS)
 	$(CC) $(CFLAGS_THREAD) $(OBJS) -o $(NAME)
+
+adres: fclean $(OBJS)
+	$(CC) $(CFLAGS_ADDRESS) $(OBJS) -o $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)

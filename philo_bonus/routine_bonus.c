@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 16:56:00 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/28 14:33:05 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/29 19:58:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*reaper(void *ptr)
 			sem_post(philo->rules->death);
 			break ;
 		}
-		u_sleep(1);
+		u_sleep(100);
 	}
 	return (0);
 }
