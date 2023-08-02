@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:34:13 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/28 13:58:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/08/02 15:17:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	ft_print(int code, t_philo *philo)
 			printf("is sleeping\n");
 		else if (code == THINK)
 			printf("is thinking\n");
-		else if (code == DIE)
-			printf("died\n");
 	}
 	pthread_mutex_unlock(&philo->rules->print_m);
 }

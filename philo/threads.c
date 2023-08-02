@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:47 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/29 18:04:17 by marvin           ###   ########.fr       */
+/*   Updated: 2023/08/02 15:19:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,14 @@ void	reaper(t_rules *rules)
 	while (!rw_val(&rules->is_death_m, &rules->is_dead, 0))
 	{
 		i = -1;
-		while (++i < p_c)
+		while (++i < p_c && !rw_val(&rules->is_death_m, &rules->is_dead, 0))
 		{
 			if (get_time() - rw_val(&rules->last_eat_m[i],
 					&rules->philos[i]->last_eat, 0) > death_t)
 			{
-				ft_print(DIE, rules->philos[i]);
 				rw_val(&rules->is_death_m, &rules->is_dead, 1);
+				printf("%d %d died\n", get_time() - rules->start,
+					rules->philos[i]->id);
 			}
 		}
 		if (p_c == rw_val(&rules->eaten_m, &rules->eaten, 0))

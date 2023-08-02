@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:06 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/29 18:11:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/08/02 15:25:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_free(t_rules *rules)
 		i = -1;
 		while (++i < rules->p_count)
 		{
-			pthread_join(rules->philos[i]->p_thread, NULL);
+			pthread_detach(rules->philos[i]->p_thread);
 			free(rules->philos[i]);
 		}
 	}
