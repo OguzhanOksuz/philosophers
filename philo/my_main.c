@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:38 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/07/29 18:13:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/08/02 15:31:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av)
 			pthread_create(&rules->philos[i]->p_thread,
 				NULL, threads, (void *)rules->philos[i]);
 		reaper(rules);
+		my_free(rules);
 		free(rules->philos);
 		free(rules);
 	}

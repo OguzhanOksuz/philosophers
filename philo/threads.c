@@ -6,7 +6,7 @@
 /*   By: ooksuz <ooksuz@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 00:33:47 by ooksuz            #+#    #+#             */
-/*   Updated: 2023/08/02 15:19:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/08/02 15:31:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,4 @@ void	reaper(t_rules *rules)
 			rw_val(&rules->is_death_m, &rules->is_dead, 1);
 		u_sleep(100);
 	}
-	my_free(rules);
 }
